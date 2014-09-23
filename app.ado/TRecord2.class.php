@@ -1,6 +1,6 @@
 <?php
 
-	abstract class TRecord
+	abstract class TRecord2
 	{
 	
 		protected $data;
@@ -111,7 +111,7 @@
 				}				
 			}
 				
-			if ( $conn = TTransaction::get() ) 
+			if ( $conn = TTransaction2::get() ) 
 			{
 				$result = $conn->exec($sql->getInstruction());
 				return $result;
@@ -124,7 +124,7 @@
 		
 		public function load($codigo)
 		{
-			// cria instru��o SQL
+			// cria instrução SQL
 			$sql = new TSqlSelect;
 			$sql->addEntity($this->getEntity());
 			$sql->addColumn('*');
@@ -133,7 +133,7 @@
 			$criteria->add(new TFilter('codigo', '=', $codigo));
 			$sql->setCriteria($criteria);
 			
-			if ( $conn = TTransaction::get() ) 
+			if ( $conn = TTransaction2::get() ) 
 			{
 				$result = $conn->query($sql->getInstruction());
 				if ( $result )
@@ -144,7 +144,7 @@
 			}
 			else
 			{
-				throw new Exception('N�o h� transa��o ativa');
+				throw new Exception('Não há transação ativa');
 			}
 		}
 		
@@ -161,7 +161,7 @@
 			$criteria->add(new TFilter('codigo', '=', $codigo));
 			$sql->setCriteria($criteria);	
 
-			if ( $conn = TTransaction::get() ) 
+			if ( $conn = TTransaction2::get() ) 
 			{
 				$result = $conn->exec($sql->getInstruction());
 
@@ -175,7 +175,7 @@
 		
 		private function getLast()
 		{
-			if ( $conn = TTransaction::get() ) 
+			if ( $conn = TTransaction2::get() ) 
 			{
 				// cria instrução SQL
 				$sql = new TSqlSelect;

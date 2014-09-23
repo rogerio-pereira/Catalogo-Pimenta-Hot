@@ -1,6 +1,6 @@
 <?php
 
-	final class TRepository
+	final class TRepository2
 	{
 	
 		private $class;
@@ -55,8 +55,9 @@
 			
 			//Criteria
 			$sql->setCriteria($criteria);
-						
-			if ($conn = TTransaction::get()) 
+			
+			
+			if ($conn = TTransaction2::get()) 
 			{	
 				$result = $conn->query($sql->getInstruction());
 				$results= array();
@@ -89,7 +90,7 @@
 			$sql->addEntity($this->entity[0]);
 			$sql->setCriteria($criteria);
 			
-			if ($conn = TTransaction::get()) 
+			if ($conn = TTransaction2::get()) 
 			{				
 				$result = $conn->exec($sql->getInstruction());
 				
@@ -112,10 +113,8 @@
 			$sql->addEntity($this->entity[0]);
 			$sql->setCriteria($criteria);
 			
-			if ($conn = TTransaction::get()) 
-			{
-				$result = $conn->query($sql->getInstruction());
-				
+			if ($conn = TTransaction2::get()) 
+			{				
 				if ($result)
 				{
 					$row = $result->fetch();

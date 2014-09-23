@@ -17,9 +17,9 @@
          *  Define o nome da entidade (tabela) manipulada pela instrução SQL
          *  @param $entity = tabela
          */
-        final public function setEntity($entity)
+        final public function addEntity($entity)
         {
-            $this->entity = $entity;
+            $this->entity[] = $entity;
         }
         
         /*

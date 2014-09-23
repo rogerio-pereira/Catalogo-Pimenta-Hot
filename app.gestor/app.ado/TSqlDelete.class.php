@@ -13,7 +13,7 @@
         public function getInstruction()
         {
             //Monta a string de DELETE
-            $this->sql = "DELETE FROM {$this->entity}";
+            $this->sql = "DELETE FROM {$this->entity[0]}";
             
             //Retorna a clausula WHERE do objeto $this->criteria
             if($this->criteria)

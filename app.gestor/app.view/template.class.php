@@ -53,11 +53,15 @@ class template
 				
 				<!--CSS-->
 				<link rel="stylesheet" href="app.view/css/template.css">
+				<link rel="stylesheet" href="app.view/css/home.css">
+				<link rel="stylesheet" href="app.view/css/formulario.css">
 				
 				<!--JQuery-->
 				<script type="text/javascript" src="app.view/js/jquery.js"></script>
 				
 				<!--JavaScript-->
+				<script type="text/javascript" src="app.view/js/formulario.js"></script>
+				<script type="text/javascript" src="app.view/js/categoria.js"></script>
 			</head>
 			<body>
 				<!--Background-->
@@ -80,7 +84,7 @@ class template
 							</ul>
 						</nav>
 						
-						Bem Vindo: <span id='nome'><!--<?php echo $_SESSION['nome'];?>-->Teste</span>
+						Bem Vindo: <span id='nomeLogo'><!--<?php echo $_SESSION['nome'];?>-->Teste</span>
 					</header>
 					
 					<section class='content'>
@@ -88,7 +92,7 @@ class template
 					</section>
 					
 					<footer class='footer'>
-						© Copyright  2014 - Pimenta hot
+						© Copyright  2014 - <a href='http://www.pimentahot.com.br/' target='_blank'>Pimenta hot</a>
 					</footer>
 			</body>
 		</html>

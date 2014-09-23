@@ -61,7 +61,7 @@
          */
         public function getInstruction()
         {
-            $this->sql  = "INSERT INTO {$this->entity} (";
+            $this->sql  = "INSERT INTO {$this->entity[0]} (";
             //Monta uma string contendo os nomes de colunas
             $colunas    = implode(', ', array_keys($this->columnValues));
             //Monta uma string contendo os valores

@@ -60,7 +60,7 @@ header.header
 	overflow:		hidden;
 }
 
-header.header span#nome
+header.header span#nomeLogo
 {
 	font-family:				Akronim;
 	
@@ -121,8 +121,8 @@ section.content
 {
 	position:				relative;
 	padding:				1%;
-	min-height:				77%;				/* ALTURA MÍNIMA, PARA O FF */
-	height:					77%;				/* ALTURA MÍNIMA, PARA O IE6 */
+	min-height:				469px;				/* ALTURA MÍNIMA, PARA O FF */
+	height:					469px;				/* ALTURA MÍNIMA, PARA O IE6 */
 	height:					auto !important;	/* ASSIM A DIV AUMENTA CASO O CONTEÚDO ULTRAPASSE A ALTURA MÍNIMA */
 	width:					94%;
 	margin-left:			auto;
@@ -158,4 +158,16 @@ footer.footer
 	
 	font-family:		'Open Sans Condensed', sans-serif;
 	font-size:			23px;
+}
+
+footer.footer a, a:active, a:visited
+{
+	color:				#ffffff;
+	text-decoration:	none;
+}
+
+footer.footer a:hover
+{
+	color:				#ffffff;
+	text-decoration:	underline;
 }

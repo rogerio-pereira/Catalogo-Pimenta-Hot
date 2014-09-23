@@ -1,0 +1,29 @@
+/*
+ *	CSS  home
+ *	CSS da classe home.class.php
+ *	
+ *	Sistema:	Catalogo_PimentaHot
+ *	Autor:		Rogério Eduardo Pereira
+ *	Data:		Sep 23, 2014
+ */
+@charset 'UTF-8';
+
+figure.logo
+{
+	position:	absolute;
+	height:		92%;
+	width:		92%;
+	text-align: center;
+}
+
+figure.logo img#logo
+{
+	position:		relative;
+	top:			25%;	
+	
+	-moz-opacity:	0.50;
+	-khtml-opacity: 0.50;
+	opacity:		0.50;
+	filter:			progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+	filter:			alpha(opacity=50);
+}

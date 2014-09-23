@@ -63,8 +63,20 @@
             //Caso seja uma string
             else if(is_string($value))
             {
-                //Adiciona aspas
-                $result = "'$value'";
+                /*
+				 * Verifica se tem ponto na string
+				 *		Se tiver esta comparando duas tabelas
+				 */
+				if(strpos($value, '.') == FALSE)
+				{
+					//Adiciona aspas
+					$result = "'$value'";
+				}
+				else
+				{
+					//Adiciona string normal
+					$result = $value;
+				}
             }
             
             //Caso seja um valor nulo

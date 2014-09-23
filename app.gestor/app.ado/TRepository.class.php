@@ -1,95 +1,132 @@
-<?
+<?php
 
-	final class TRepository{
+	final class TRepository
+	{
 	
 		private $class;
+		private $columns;
+		private $entity;
 	
-		function __construct($class){
-			
-			$this->class = $class;
+		function __construct()
+		{
 			
 		}
 		
-		function load(TCriteria $criteria){
+		/*
+         *  MÃ©todo addColumn
+         *  Adiciona uma coluna a ser retornada pelo SELECT
+         *  @param $column = Coluna da Tabela
+         */
+        public function addColumn($column)
+        {
+            //Adiciona coluna no array
+            $this->columns[] = $column;
+        }
 		
+		/*
+         *  MÃ©todo setEntity()
+         *  Define o nome da entidade (tabela) manipulada pela instruÃ§Ã£o SQL
+         *  @param $entity = tabela
+         */
+        final public function addEntity($entity)
+        {
+            $this->entity[] = $entity;
+        }
+		
+		function load(TCriteria $criteria)
+		{
 			$sql = new TSqlSelect;
-			$sql->addColumn('*');
-			$sql->setEntity(constant($this->class.'::TABLENAME'));
-			$sql->setCriteria($criteria);
 			
-			if ($conn = TTransaction::get()) {
-				TTransaction::log($sql->getInstruction());
-				
+			//Colunas
+			if(count($this->columns) == 1)
+				$sql->addColumn($this->columns[0]);
+			else
+				foreach ($this->columns as $coluna)
+					$sql->addColumn($coluna);
+			
+			
+			//Entidade
+			if(count($this->entity) == 1)
+				$sql->addEntity($this->entity[0]);
+			else
+				foreach ($this->entity as $entidade)
+					$sql->addEntity($entidade);
+			
+			
+			//Criteria
+			$sql->setCriteria($criteria);
+						
+			if ($conn = TTransaction::get()) 
+			{	
 				$result = $conn->query($sql->getInstruction());
 				$results= array();
 				
-				if ($result){
-					while($row = $result->fetchObject($this->class)){
+				if ($result)
+				{
+					while($row = $result->fetchObject(get_class($this)))
+					{
 						$results[] = $row;
 					}
 				}
 				
 				return $results;
 			}
-			else {
-				throw new Exception('Não há transação ativa!');
+			else 
+			{
+				throw new Exception('NÃ£o hÃ¡ transaÃ§Ã£o ativa!');
 			}
-		
 		}
 		
 		/*
-		 * método delete()
+		 * mï¿½todo delete()
 		 * Exclui um conjunto de objetos (collection) da base de dados
-		 * através de um critério de seleção
+		 * atravï¿½s de um critï¿½rio de seleï¿½ï¿½o
 		 * @param $crteria = objeto do tipo TCriteria
 		 */
-		function delete(TCriteria $criteria){
-		
+		function delete(TCriteria $criteria)
+		{
 			$sql = new TSqlDelete;
-			$sql->setEntity(constant($this->class.'::TABLENAME'));
+			$sql->addEntity($this->entity[0]);
 			$sql->setCriteria($criteria);
 			
-			if ($conn = TTransaction::get()) {
-				TTransaction::log($sql->getInstruction());
-				
+			if ($conn = TTransaction::get()) 
+			{				
 				$result = $conn->exec($sql->getInstruction());
 				
 				return $result;
 			}
-			else {
-				throw new Exception('Não há transação ativa!');
-			}			
-		
+			else 
+			{
+				throw new Exception('NÃ£o hÃ¡ transaÃ§Ã£o ativa!');
+			}	
 		}
 		
 		/*
-		 * método count()
+		 * mÃ©todo count()
 		 */
-		function count(TCriteria $criteria){
+		function count(TCriteria $criteria)
+		{
 		
 			$sql = new TSqlSelect;
 			$sql->addColumn(' count(*) ');
-			$sql->setEntity(constant($this->class.'::TABLENAME'));
+			$sql->addEntity($this->entity[0]);
 			$sql->setCriteria($criteria);
 			
-			if ($conn = TTransaction::get()) {
-				TTransaction::log($sql->getInstruction());
-				
+			if ($conn = TTransaction::get()) 
+			{
 				$result = $conn->query($sql->getInstruction());
 				
-				if ($result){
-				
+				if ($result)
+				{
 					$row = $result->fetch();
-	
 				}
 				
 				return $row[0];
 			}
-			else {
-				throw new Exception('Não há transação ativa!');
-			}		
-		
+			else 
+			{
+				throw new Exception('NÃ£o hÃ¡ transaÃ§Ã£o ativa!');
+			}	
 		}
 	}
-
 ?>

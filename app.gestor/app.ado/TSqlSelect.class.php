@@ -28,9 +28,16 @@
             //Monta a instrução de SELECT
             $this->sql =    'SELECT ';
             //Monta uma string com os nomes das colunas
-            $this->sql .=   implode(',', $this->columns);
+			if(count($this->columns) == 1)
+				$this->sql .=   $this->columns[0];
+			else
+				$this->sql .=   implode(',', $this->columns);
+			
             //Adiciona cláusula FROM o nome da tabela
-            $this->sql .=  ' FROM ' . $this->entity;
+			if(count($this->entity) == 1)
+				$this->sql .=  ' FROM ' . $this->entity[0];
+			else
+				$this->sql .=  ' FROM ' . implode(',', $this->entity);
             
             //Obtem cláusula WHERE do objeto criteria
             if($this->criteria)

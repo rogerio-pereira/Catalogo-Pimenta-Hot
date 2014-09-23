@@ -52,7 +52,7 @@
         public function getInstruction()
         {
             //Monta a string de UPDATE
-            $this->sql = "UPDATE {$this->entity}";
+            $this->sql = "UPDATE {$this->entity[0]}";
             
             //Monta os pares: coluna=valor,...
             if($this->columnValues)

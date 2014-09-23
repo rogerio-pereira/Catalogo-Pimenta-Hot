@@ -31,7 +31,11 @@ class home
 	 */
 	public function show()
 	{
-		echo 'Home';
+	?>
+		<figure class='logo'>
+			<img src='app.view/img/template/logo.png' id='logo'>
+		</figure>
+	<?php
 	}
 }
 ?>
