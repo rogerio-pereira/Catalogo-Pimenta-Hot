@@ -66,7 +66,7 @@ class categorias
 										<td>
 											{$categoria->nome}
 										</td>
-										<td style='text-align: center;'>
+										<td>
 											<input type='checkbox' name='categoriasApagar[]' class='chkCategoriasApagar' value='{$categoria->codigo}'>
 										</td>
 									</tr>

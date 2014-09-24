@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS `bd_cat_pimentahot`.`catalogo_usuario` (
   `nome` VARCHAR(100) NOT NULL,
   `usuario` VARCHAR(15) NOT NULL,
   `senha` VARCHAR(32) NOT NULL,
+  `administrador` BIT NOT NULL DEFAULT 0,
   PRIMARY KEY (`codigo`),
   UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC),
   UNIQUE INDEX `usuario_UNIQUE` (`usuario` ASC))
@@ -67,7 +68,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `bd_cat_pimentahot`;
-INSERT INTO `bd_cat_pimentahot`.`catalogo_usuario` (`codigo`, `nome`, `usuario`, `senha`) VALUES (1, 'Suporte', 'SupCatPimentaHot', 'c2a6fad017476bdb1f59b1d64b800639');
+INSERT INTO `bd_cat_pimentahot`.`catalogo_usuario` (`codigo`, `nome`, `usuario`, `senha`, `administrador`) VALUES (1, 'Suporte', 'SupCatPimentaHot', 'c2a6fad017476bdb1f59b1d64b800639', 1);
 
 COMMIT;
 
