@@ -83,7 +83,8 @@ class login
 							placeholder='Senha' 
 						>	<br><br>
 						<input type="hidden" id="action" name="action"/>
-						<input name='botaoLogin' type='button' id='botaoLogin' value='Login' onclick='executaLogin()'/>
+						<input name='botaoLogin' type='button' id='botaoLogin' value='Login' onclick='executaLogin()'/>	
+						<!--<input name='botaoLogin' type='button' id='botaoLogin' value='Login' onclick="doPost('login','login')"/>-->
 					  </form>
 				</div>
 			</body>

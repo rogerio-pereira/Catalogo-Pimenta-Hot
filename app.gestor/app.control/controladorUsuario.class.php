@@ -256,5 +256,37 @@ class controladorUsuario
 			return false;
 		}
 	}
+	
+	/*
+	 *	Método alteraSenha
+	 *	Altera a senha do Usuario
+	 *	Usado em IFRAMES
+	 */
+	public function alteraSenha()
+	{
+		try
+		{
+			$this->usuario = new catalogo_usuario2();
+			
+			$this->usuario->codigo			= $_SESSION['usuario']->codigo;
+			$this->usuario->nome			= $_SESSION['usuario']->nome;
+			$this->usuario->usuario			= $_SESSION['usuario']->usuario;
+			$this->usuario->senha			= $this->getUsuarioSenha();
+			$this->usuario->administrador	= $_SESSION['usuario']->administrador;
+			
+			//RECUPERA CONEXAO BANCO DE DADOS
+			TTransaction2::open('my_bd_site');
+
+			$result = $this->usuario->store();
+			
+			TTransaction2::close();
+
+			return true;
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+	}
 }
 ?>

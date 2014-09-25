@@ -26,7 +26,7 @@
         }
     }
 	
-	error_reporting(E_WARNING);
+	//error_reporting(E_WARNING);
 	
 	//Obtem informação do que sera feito através do campo hiddens
 	$request = $_POST['action'];
@@ -142,13 +142,15 @@
 	}
 	//Salva/Altera Usuario
 	else if($request == 'salvarUsuario')
-	{		
+	{	
+		
 		$controlador = new controladorUsuario();
 		
 		$controlador->setUsuarioCodigo($_POST['codigo']);
 		$controlador->setUsuarioNome($_POST['nome']);
 		$controlador->setUsuarioLogin($_POST['usuario']);
-		$controlador->setUsuarioSenha($_POST['senha']);
+		if($_POST['senha'] != NULL)
+			$controlador->setUsuarioSenha($_POST['senha']);
 		$controlador->setUsuarioAdmin($_POST['administrador']);
 		
 		if($controlador->salvarUsuario2() == true)
@@ -177,6 +179,116 @@
 		
 		$collectionUsuarios= $controlador->getUsuarios2();
 		
-		//Imprime usuarios igual na classe usuarios.class.php
+		echo 
+			"
+				<tr>
+					<td colspan='5' class='center'>
+						<input type='button' value='Alterar Senha' onclick='alteraSenha()'>
+					</td>
+				</tr>
+			";
+		
+		if($_SESSION['usuario']->administrador == true)			
+		{
+			echo
+				" 
+					<tr>
+						<td colspan='5'>
+							<hr>
+						</td>
+					</tr>
+					<tr class='titulo'>
+						<td>Apagar</td>
+						<td>Nome</td>
+						<td>Usuario</td>
+						<td>Tipo Usuario</td>
+						<td>Apagar</td>
+					</tr>
+					<tr>
+						<td colspan='5'>
+							<hr>
+						</td>
+					</tr>
+				";
+			foreach ($this->collectionUsuario as $usuario)
+			{
+				echo
+					"
+						<!--{$usuario->nome}-->
+						<tr>
+							<td class='center'>
+								<input type='radio' name='radioUsuario' id='radioUsuario' value='$usuario->codigo'>
+							</td>
+							<td>
+								{$usuario->nome}
+							</td>
+							<td>
+								{$usuario->usuario}
+							</td>
+							<td>
+					";
+				if($usuario->administrador == 1)
+					echo 'Administrador';
+				else
+					echo 'Usuario Comum';
+				echo 
+					"		</td>
+							<td class='center'>
+								<input type='checkbox' name='usuariosApagar[]' class='chkUsuariosApagar' value='{$usuario->codigo}'>
+							</td>
+						</tr>
+					";
+			}
+			echo
+				" 
+					<tr>
+						<td colspan='5'>
+							<hr>
+						</td>
+					</tr>
+					<tr>
+						<td colspan='5' style='text-align: center'>
+							<input type='button' value='Novo'		onclick='novoUsuario()'>
+							<input type='button' value='Alterar'	onclick='alteraUsuario()'>
+				";
+			if(count($this->collectionUsuario) > 0)
+					echo "<input type='button' value='Apagar' onclick='apagaUsuario()'>";
+
+			echo
+				" 
+						</td>
+					</tr>
+				";
+		}
+	}
+	//AlteraSenha
+	else if($request='alteraSenha')
+	{
+		$controlador	= new controladorAlterarSenha();
+		
+		$controlador->setSenhaAtual($_POST['senhaAtual']);
+		$controlador->setSenhaNova($_POST['senhaNova']);
+		
+		if($controlador->compara() == true)
+		{
+			if($controlador->altera())
+				echo "
+					<script>
+						alert('Senha alterada com sucesso!');
+					</script>
+				";
+			else
+				echo "
+					<script>
+						alert('Falha ao alterar Senha!');
+					</script>
+				";
+		}
+		else
+			echo "
+					<script>
+						alert('Senha inválida!');
+					</script>
+				";		
 	}
 ?>

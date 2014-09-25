@@ -80,6 +80,9 @@ class controladorLogin
 	 */
 	private function compara()
 	{	
+		var_dump($this->usuario);
+		var_dump($this->senha);
+		var_dump($this->usuarioBD);
 		if  (
 				($this->usuario == $this->usuarioBD->usuario) &&
 				($this->senha   == $this->usuarioBD->senha)

@@ -121,7 +121,59 @@ function apagaUsuario()
 }
 
 //Redireciona para a classe alteraSenha
-function alteraSenha()
+function alteraSenhaRedirect()
 {
 	window.location = "?class=alteraSenha";
+}
+
+function validaAlterarSenha()
+{
+	var valida;
+	valida = true;
+	
+	if ($('#senhaAtual').val() == '')
+	{
+		alert('Digite a Senha Atual!');
+		$('#senhaAtual').focus();
+		return;
+	}
+	if ($('#senhaNova').val() == '')
+	{
+		alert('Digite a Senha Nova!');
+		$('#senhaNova').focus();
+		return;
+	}
+	else if ($('#senhaNova').val() !=  $('#confirmacao').val())
+	{
+		alert('Senha nova diferente da Confirmação!');
+		
+		$('#senhaNova').val('');
+		$('#confirmacao').val('');
+		
+		$('#senhaNova').focus();
+		
+		return;
+	}
+	
+	if (valida = true)
+		alterarSenha();		
+}
+
+function alterarSenha()
+{
+	$.ajax
+	({
+		type: "POST",
+		url: "app.control/ajax.php",
+		data: 
+		{
+			senhaAtual:	$('#senhaAtual').val(),
+			senhaNova:	$('#senhaNova').val(),
+			action:		'alteraSenha'
+		},
+		success: function(data) 
+		{
+			top.location='?class=usuarios';
+		}
+	});
 }

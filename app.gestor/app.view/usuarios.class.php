@@ -50,85 +50,83 @@ class usuarios
 					<table class='tabela-usuarios'>
 						<tr>
 							<td colspan='5' class='center'>
-								<input type='button' value='Alterar Senha' onclick='alteraSenha()'>
-							</td>
-						</tr>
-						</tr>
-						<tr>
-							<td colspan="5">
-								<hr>
-							</td>
-						</tr>
-						<tr class='titulo'>
-							<td>Apagar</td>
-							<td>Nome</td>
-							<td>Usuario</td>
-							<td>Tipo Usuario</td>
-							<?php 
-								if($usuario->administrador == 1)
-									echo '<td>Apagar</td>';
-							?>
-						</tr>
-						<tr>
-							<td colspan="5">
-								<hr>
+								<input type='button' value='Alterar Senha' onclick='alteraSenhaRedirect()'>
 							</td>
 						</tr>
 						<?php
-							foreach ($this->collectionUsuario as $usuario)
+							if($_SESSION['usuario']->administrador == true)			
 							{
 								echo
-									"
-										<!--{$usuario->nome}-->
+									" 
 										<tr>
-											<td class='center'>
-												<input type='radio' name='radioUsuario' id='radioUsuario' value='$usuario->codigo'>
+											<td colspan='5'>
+												<hr>
 											</td>
-											<td>
-												{$usuario->nome}
+										</tr>
+										<tr class='titulo'>
+											<td>Apagar</td>
+											<td>Nome</td>
+											<td>Usuario</td>
+											<td>Tipo Usuario</td>
+											<td>Apagar</td>
+										</tr>
+										<tr>
+											<td colspan='5'>
+												<hr>
 											</td>
-											<td>
-												{$usuario->usuario}
-											</td>
-											<td>
-									";
-								if($usuario->administrador == 1)
-									echo 'Administrador';
-								else
-									echo 'Usuario Comum';
-								echo 
-									"		</td>
-											<td class='center'>
-									";
-								//Usuario administrador pode excluir
-								if($usuario->administrador == 1)
-									echo
-										"
-											<input type='checkbox' name='usuariosApagar[]' class='chkUsuariosApagar' value='{$usuario->codigo}'>
-										";
-								echo
-									"		</td>
 										</tr>
 									";
-								
+								foreach ($this->collectionUsuario as $usuario)
+								{
+									echo
+										"
+											<!--{$usuario->nome}-->
+											<tr>
+												<td class='center'>
+													<input type='radio' name='radioUsuario' id='radioUsuario' value='$usuario->codigo'>
+												</td>
+												<td>
+													{$usuario->nome}
+												</td>
+												<td>
+													{$usuario->usuario}
+												</td>
+												<td>
+										";
+									if($usuario->administrador == 1)
+										echo 'Administrador';
+									else
+										echo 'Usuario Comum';
+									echo 
+										"		</td>
+												<td class='center'>
+													<input type='checkbox' name='usuariosApagar[]' class='chkUsuariosApagar' value='{$usuario->codigo}'>
+												</td>
+											</tr>
+										";
+								}
+								echo
+									" 
+										<tr>
+											<td colspan='5'>
+												<hr>
+											</td>
+										</tr>
+										<tr>
+											<td colspan='5' style='text-align: center'>
+												<input type='button' value='Novo'		onclick='novoUsuario()'>
+												<input type='button' value='Alterar'	onclick='alteraUsuario()'>
+									";
+								if(count($this->collectionUsuario) > 0)
+										echo "<input type='button' value='Apagar' onclick='apagaUsuario()'>";
+
+								echo
+									" 
+											</td>
+										</tr>
+									";
 							}
 						?>
-						<tr>
-							<td colspan='5'>
-								<hr>
-							</td>
-						</tr>
-						<tr>
-							<td colspan='5' style='text-align: center'>
-								<input type='button' value='Novo'		onclick='novoUsuario()'>
-								<input type='button' value='Alterar'	onclick='alteraUsuario()'>
-								
-								<?php
-									if(count($this->collectionUsuario) > 0)
-										echo "<input type='button' value='Apagar' onclick='apagaUsuario()'>";
-								?>
-							</td>
-						</tr>
 					</table>
 				</fieldset>
 		</form>

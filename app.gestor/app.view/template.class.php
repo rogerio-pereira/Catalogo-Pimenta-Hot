@@ -88,7 +88,7 @@ class template
 							</ul>
 						</nav>
 						
-						Bem Vindo: <span id='nomeLogo'><!--<?php echo $_SESSION['nome'];?>-->Teste</span>
+						Bem Vindo: <span id='nomeLogo'><?php echo $_SESSION['usuario']->nome;?></span>
 					</header>
 					
 					<section class='content'>
