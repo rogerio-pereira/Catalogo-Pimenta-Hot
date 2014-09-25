@@ -48,6 +48,32 @@ class usuarios
 				<fieldset>
 					<legend>Usuarios</legend>
 					<table class='tabela-usuarios'>
+						<tr>
+							<td colspan='5' class='center'>
+								<input type='button' value='Alterar Senha' onclick='alteraSenha()'>
+							</td>
+						</tr>
+						</tr>
+						<tr>
+							<td colspan="5">
+								<hr>
+							</td>
+						</tr>
+						<tr class='titulo'>
+							<td>Apagar</td>
+							<td>Nome</td>
+							<td>Usuario</td>
+							<td>Tipo Usuario</td>
+							<?php 
+								if($usuario->administrador == 1)
+									echo '<td>Apagar</td>';
+							?>
+						</tr>
+						<tr>
+							<td colspan="5">
+								<hr>
+							</td>
+						</tr>
 						<?php
 							foreach ($this->collectionUsuario as $usuario)
 							{
@@ -55,7 +81,7 @@ class usuarios
 									"
 										<!--{$usuario->nome}-->
 										<tr>
-											<td>
+											<td class='center'>
 												<input type='radio' name='radioUsuario' id='radioUsuario' value='$usuario->codigo'>
 											</td>
 											<td>
@@ -72,13 +98,13 @@ class usuarios
 									echo 'Usuario Comum';
 								echo 
 									"		</td>
-											<td>
+											<td class='center'>
 									";
 								//Usuario administrador pode excluir
 								if($usuario->administrador == 1)
 									echo
 										"
-											<input type='checkbox' name='usuariosApagar[]' class='chkCategoriasApagar' value='{$usuario->codigo}'>
+											<input type='checkbox' name='usuariosApagar[]' class='chkUsuariosApagar' value='{$usuario->codigo}'>
 										";
 								echo
 									"		</td>
@@ -99,7 +125,7 @@ class usuarios
 								
 								<?php
 									if(count($this->collectionUsuario) > 0)
-										echo "<input type='button' value='Apagar' onclick='apagaCategorias()'>";
+										echo "<input type='button' value='Apagar' onclick='apagaUsuario()'>";
 								?>
 							</td>
 						</tr>

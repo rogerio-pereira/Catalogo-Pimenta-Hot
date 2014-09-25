@@ -62,6 +62,7 @@ class template
 				<!--JavaScript-->
 				<script type="text/javascript" src="app.view/js/formulario.js"></script>
 				<script type="text/javascript" src="app.view/js/categoria.js"></script>
+				<script type="text/javascript" src="app.view/js/usuario.js"></script>
 			</head>
 			<body>
 				<!--Background-->

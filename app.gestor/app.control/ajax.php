@@ -116,4 +116,43 @@
 				</tr>
 			";
 	}
+	//Salva/Altera Usuario
+	else if($request == 'salvarUsuario')
+	{		
+		$controlador = new controladorUsuario();
+		
+		$controlador->setUsuarioCodigo($_POST['codigo']);
+		$controlador->setUsuarioNome($_POST['nome']);
+		$controlador->setUsuarioLogin($_POST['usuario']);
+		$controlador->setUsuarioSenha($_POST['senha']);
+		$controlador->setUsuarioAdmin($_POST['administrador']);
+		
+		if($controlador->salvarUsuario2() == true)
+		{
+			return true;
+		}
+		else
+		{
+			echo "<script> alert('Impossivel salvar Usuario');</script>";
+			
+			return false;
+		}
+	}
+	//Apaga Usuarios
+	else if($request == 'apagaUsuarios')
+	{		
+		$codigos = $_POST['codigos'];
+		$apagado  = 0;
+		
+		$controlador	= new controladorUsuario();
+		
+		foreach ($codigos as $codigo)
+		{
+			$controlador->apagaUsuario2($codigo);
+		}
+		
+		$collectionUsuarios= $controlador->getUsuarios2();
+		
+		//Imprime usuarios igual na classe usuarios.class.php
+	}
 ?>

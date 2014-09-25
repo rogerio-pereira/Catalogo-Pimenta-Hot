@@ -15,15 +15,25 @@ table
 	font-family:	'Open Sans Condensed', sans-serif;
 	font-size:		20px;
 	font-weight:	bold;
+}	
+
+.titulo, .obrigatorio
+{
+	color:	#df4f0c;
+}
+
+.center
+{
+	text-align: center;
 }
 
 table tr td
 {
-	padding-left:	8px;
-	padding-right:	8px;
+	padding-left:	15px;
+	padding-right:	15px;
 }
 
-input[type='button']
+input[type='button'], input[type='submit']
 {
 	padding:						5px 15px 5px 15px;
 	
@@ -58,7 +68,7 @@ input[type='button']
 	-ms-transition-property:		background;
 }
 
-input[type='button']:hover
+input[type='button']:hover, input[type='submit']:hover
 {
 	background-image:	-webkit-linear-gradient(#ff0000, #fe7d42);
     background-image:	-o-linear-gradient(#ff0000, #fe7d42);

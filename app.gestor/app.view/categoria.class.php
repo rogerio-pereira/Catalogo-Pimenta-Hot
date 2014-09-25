@@ -72,7 +72,7 @@ class categoria
 						<td class='obrigatorio'>
 							<label for='nome'>Nome</label>
 						</td>
-						<td>
+						<td class='obrigatorio'>
 							<input 
 								type='text' 
 								id='nome' 
@@ -84,7 +84,7 @@ class categoria
 						</td>
 					</tr>
 					<tr>
-						<td colspan='2' style='text-align: center'>
+						<td colspan='2' class='center'>
 							<input type='button' value='Salvar'	onclick='validaCategoria()'>
 						</td>
 					</tr>

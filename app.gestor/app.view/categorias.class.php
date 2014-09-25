@@ -48,10 +48,15 @@ class categorias
 			<fieldset>
 				<legend>Categorias</legend>
 				<table class='tabela-categorias'>
-					<tr>
+					<tr class='titulo'>
 						<td>Alterar</td>
 						<td>Nome</td>
 						<td>Apagar</td>
+					</tr
+					<tr>
+						<td colspan="3">
+							<hr>
+						</td>
 					</tr>
 					<?php
 						foreach ($this->collectionCategorias as $categoria)
@@ -60,13 +65,13 @@ class categorias
 								"
 									<!--{$categoria->nome}-->
 									<tr>
-										<td>
+										<td class='center'>
 											<input type='radio' name='radioCategoria' id='radioCategoria' value='$categoria->codigo'>
 										</td>
 										<td>
 											{$categoria->nome}
 										</td>
-										<td>
+										<td class='center'>
 											<input type='checkbox' name='categoriasApagar[]' class='chkCategoriasApagar' value='{$categoria->codigo}'>
 										</td>
 									</tr>

@@ -32,7 +32,7 @@ class TApplication
     {
         //new session;
         //Suprimir Warnings
-        //error_reporting(E_WARNING);
+        error_reporting(E_WARNING);
         
 	/*if($_SESSION['nome'] == '')
         {
