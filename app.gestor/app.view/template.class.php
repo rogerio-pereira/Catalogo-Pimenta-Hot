@@ -82,6 +82,9 @@ class template
 								<li>
 									<a href='?class=usuarios'>Usuarios</a>
 								</li>
+								<li>
+									<a href='?class=logoff'>Logoff</a>
+								</li>
 							</ul>
 						</nav>
 						

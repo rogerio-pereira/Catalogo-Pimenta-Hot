@@ -170,6 +170,35 @@ class controladorUsuario
 	}
 	
 	/*
+	 *	Método getUsuarioByUser2
+	 *	Obtem o usuario
+	 *	Usado em Iframes
+	 */
+	public function getUsuarioByUser2($usuario)
+	{
+		$this->collectionUsuario = NULL;
+		
+		//RECUPERA CONEXAO BANCO DE DADOS
+		TTransaction2::open('my_bd_site');
+
+		//TABELA exposition_gallery
+		$criteria	= new TCriteria;
+		$criteria->add(new TFilter('usuario', '=', $usuario));
+		//$criteria->setProperty('order', 'nome');
+		
+		$this->repository = new TRepository2();
+		
+		$this->repository->addColumn('*');
+		$this->repository->addEntity('catalogo_usuario');
+		
+		$this->collectionUsuario = $this->repository->load($criteria);
+		
+		TTransaction2::close();
+		
+		return $this->collectionUsuario[0];
+	}
+	
+	/*
 	 *	Método salvarUsuario2
 	 *	Insere/Atualiza o Usuario
 	 *	Usado em IFRAMES

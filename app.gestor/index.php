@@ -30,62 +30,69 @@ class TApplication
      */
     static public function run()
     {
-        //new session;
+        new session;
         //Suprimir Warnings
         error_reporting(E_WARNING);
         
-	/*if($_SESSION['nome'] == '')
-        {
-		$pagina 	= new login;
-		$pagina->show();
-        }
-	else
-	{*/
-		//$template = file_get_contents('app.view/template.class.php');
-		$template = new template;
-		ob_start();
-		$template->show();
-		$template = ob_get_contents();
-		ob_get_clean();
-
-		$content = '';
-		/*
-		 *  Se tiver parametros na URL, carrega a classe
-		 */
-		if ($_GET)
+		if(!isset($_SESSION['usuario']))
 		{
-			$class = $_GET['class'];
-			if (class_exists($class))
-			{
-				$pagina = new $class;
-				ob_start();
-				$pagina->show();
-				$content = ob_get_contents();
-				ob_end_clean();
-			}
-			else if (function_exists($method))
-			{
-				call_user_func($method, $_GET);
-			}
+			if ($_GET['class'])
+				echo "
+						<script>
+							top.location='./';
+						</script>
+					";
+			
+			$pagina 	= new login;
+			$pagina->show();
 		}
-		/*
-		 * Caso nao tenha parametros na URL, carreaga padrao
-		 */
 		else
 		{
-			$pagina 	= new home;
+			//$template = file_get_contents('app.view/template.class.php');
+			$template = new template;
 			ob_start();
-			$pagina->show();
-			$content 	= ob_get_contents();
-			ob_end_clean();				
+			$template->show();
+			$template = ob_get_contents();
+			ob_get_clean();
+
+			$content = '';
+			/*
+			 *  Se tiver parametros na URL, carrega a classe
+			 */
+			if ($_GET)
+			{
+				$class = $_GET['class'];
+				if (class_exists($class))
+				{
+					$pagina = new $class;
+					ob_start();
+					$pagina->show();
+					$content = ob_get_contents();
+					ob_end_clean();
+				}
+				else if (function_exists($method))
+				{
+					call_user_func($method, $_GET);
+				}
+			}
+			/*
+			 * Caso nao tenha parametros na URL, carreaga padrao
+			 */
+			else
+			{
+				$pagina 	= new home;
+				ob_start();
+				$pagina->show();
+				$content 	= ob_get_contents();
+				ob_end_clean();				
+			}
+			/*
+			 *  Susbstitui a string #CONTENT# do template para a pagina principal
+			 */
+			$site = str_replace('#CONTENT#', $content, $template);
+			echo $site;
 		}
-		/*
-		 *  Susbstitui a string #CONTENT# do template para a pagina principal
-		 */
-		$site = str_replace('#CONTENT#', $content, $template);
-		echo $site;
-	}
-    //}
+    }
 }
 //new ContaVisitas();
 TApplication::run();

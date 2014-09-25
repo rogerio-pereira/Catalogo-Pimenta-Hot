@@ -26,13 +26,37 @@
         }
     }
 	
-//	/error_reporting(E_WARNING);
+	error_reporting(E_WARNING);
 	
 	//Obtem informação do que sera feito através do campo hiddens
 	$request = $_POST['action'];
 	
+	//Login
+	if($request == 'login')
+	{
+		$controlador	= new controladorLogin();
+		
+		$controlador->setUsuario( $_POST['usuario']);
+		$controlador->setSenha($_POST['senha']);
+		
+		$retorno = $controlador->login();
+		
+		if($retorno == true)
+		{
+			return true;
+		}
+		else
+		{
+			session_destroy();
+			echo "
+					<script>
+						alert('Falha ao fazer login');
+					</script>
+				";
+		}
+	}	
 	//Salva/Altera Categoria
-	if($request == 'salvarCategoria')
+	else if($request == 'salvarCategoria')
 	{		
 		$controlador = new controladorCategoria();
 		

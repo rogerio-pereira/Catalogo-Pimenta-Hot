@@ -77,3 +77,30 @@ input[type='button']:hover, input[type='submit']:hover
 	
 	text-decoration:	underline;
 }
+
+input[type='text'], input[type='password'], input[type='number']
+{
+	background-color: 	#e4e0e0;
+	color:				#000000;
+	font-family:		'Open Sans Condensed', sans-serif;
+	font-size:			16px;
+	width:				98%;
+	border:				0 none;
+}
+
+::-webkit-input-placeholder 
+{
+   color: #a5a5a5;
+}
+:-moz-placeholder 
+{
+   color: #a5a5a5;  
+}
+::-moz-placeholder 
+{
+   color: #a5a5a5;  
+}
+:-ms-input-placeholder 
+{  
+   color: #a5a5a5;  
+}
