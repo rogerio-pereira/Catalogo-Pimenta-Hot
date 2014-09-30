@@ -19,6 +19,8 @@ class produtos
 	 */
 	private $collectionProdutos;
 	private $controlador;
+	private $controladorCategoria;
+	private $categoria;
 
 	/*
 	 * Método construtor
@@ -27,6 +29,9 @@ class produtos
 	{
 		$this->controlador			= new controladorProdutos;
 		$this->collectionProdutos	= $this->controlador->getProdutos();
+		
+		$this->controladorCategoria	= new controladorCategoria;
+		$this->categoria			= NULL;
 	}
 	/*
 	 * Método show
@@ -53,15 +58,17 @@ class produtos
 						<td>Categoria</td>
 						<td>Ativo</td>
 						<td>Apagar</td>
-					</tr
+					</tr>
 					<tr>
-						<td colspan="5">
+						<td colspan='5'>
 							<hr>
 						</td>
 					</tr>
 					<?php
 						foreach($this->collectionProdutos as $produto)
 						{
+							$this->categoria = $this->controladorCategoria->getCategoria($produto->categoria);
+							
 							echo
 								"
 									<tr>
@@ -72,7 +79,7 @@ class produtos
 											{$produto->nome}
 										</td>
 										<td>
-											{produto->categoria->nome}
+											{$this->categoria->nome}
 										</td>
 										<td>
 								";
@@ -95,12 +102,15 @@ class produtos
 					</tr>
 					<tr>
 						<td colspan='5' class='center'>
-							<input type='button' value='Nova'		onclick='novoProduto()'>
-							<input type='button' value='Alterar'	onclick='alteraProduto()'>
-
+							<input type='button' value='Novo'		onclick='novoProduto()'>
+							
 							<?php
 								if(count($this->collectionProdutos) > 0)
-									echo "<input type='button' value='Apagar' onclick='apagaProdutos()'>";
+									echo 
+										" 
+											<input type='button' value='Alterar'	onclick='alteraProduto()'>
+											<input type='button' value='Apagar'		onclick='apagaProdutos()'>
+										";
 							?>
 						</td>
 					</tr>

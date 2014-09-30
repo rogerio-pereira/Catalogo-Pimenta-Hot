@@ -46,7 +46,7 @@ class usuarios
 		>
 			<input type="hidden" id="action" name="action"/>
 				<fieldset>
-					<legend>Usuarios</legend>
+					<legend>Usuários</legend>
 					<table class='tabela-usuarios'>
 						<tr>
 							<td colspan='5' class='center'>
@@ -66,7 +66,7 @@ class usuarios
 										<tr class='titulo'>
 											<td>Apagar</td>
 											<td>Nome</td>
-											<td>Usuario</td>
+											<td>Usuário</td>
 											<td>Tipo Usuario</td>
 											<td>Apagar</td>
 										</tr>
@@ -115,10 +115,13 @@ class usuarios
 										<tr>
 											<td colspan='5' style='text-align: center'>
 												<input type='button' value='Novo'		onclick='novoUsuario()'>
-												<input type='button' value='Alterar'	onclick='alteraUsuario()'>
 									";
 								if(count($this->collectionUsuario) > 0)
-										echo "<input type='button' value='Apagar' onclick='apagaUsuario()'>";
+										echo 
+											" 
+												<input type='button' value='Alterar'	onclick='alteraUsuario()'>
+												<input type='button' value='Apagar'		onclick='apagaUsuario()'>
+											";
 
 								echo
 									" 

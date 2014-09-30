@@ -17,13 +17,21 @@ class catalogo
 	/*
 	 * Variaveis
 	 */
+	private $collectionProdutos;
+	private $categoria;
+	
+	private $controladorProdutos;
+	private $controladorCategoria;	
 
 	/*
 	 * Método construtor
 	 */
 	public function __construct()
 	{
+		$this->controladorProdutos	= new controladorProdutos;
+		$this->controladorCategoria	= new controladorCategoria;
 		
+		$this->controladorCategoria = $this->controladorCategoria->getCategorias();
 	}
 	
 	/*
@@ -32,6 +40,8 @@ class catalogo
 	 */
 	public function show()
 	{
+		$pagina;
+		$contadorProduto;
 	?>
 		<!DOCTYPE HTML>
 		<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br">
@@ -69,7 +79,7 @@ class catalogo
 						<article class='capa'>
 							<div title="Capa" id='capa'>
 								<span id='logo'>
-									Pimneta Hot
+									Pimenta Hot
 								</span>
 								<br>
 								<span id='catalogo'>
@@ -77,24 +87,92 @@ class catalogo
 								</span>
 							</div>
 						</article>
-						<div title="second page">
-							<h3>Page 2</h3>
-						</div>
-						<div title="third page">
-							<h3>Page 3</h3>
-						</div>
-						<div title="fourth page">
-							<h3>Page 4</h3>
-						</div>
-						<div title="fifth page">
-							<h3>Page 5</h3>
-						</div>
-						<div title="sixth page">
-							<h3>Page 6</h3>
-						</div>
-						<div title="seventh page">
-							<h3>Page 7</h3>
-						</div>
+						
+						<?php
+							$pagina = true;
+							$id;
+							$class;
+							
+							//Percorre Categoria
+							foreach($this->controladorCategoria as $categoria)
+							{
+								$pagina				= !$pagina;
+								
+								$this->collectionProdutos	= $this->controladorProdutos->getProdutos($categoria->codigo);
+								
+								if(count($this->collectionProdutos) > 0)
+									echo
+										" 
+											<article class='pagina'>
+												<div title='Categoria_{$categoria->nome}' id='capaCategoria'>
+													<span id='titulo'>
+														{$categoria->nome}
+													</span>
+												</div>
+											</article>
+										";
+								
+								$contadorProduto = 0;
+								$pagina				= !$pagina;
+								
+								echo "<article class='pagina'>";
+									
+								foreach($this->collectionProdutos as $produtos)
+								{
+									if($contadorProduto == 4)
+									{
+										$contadorProduto	= 0;
+										$pagina				= !$pagina;
+										
+										echo 
+											" 
+												</article>
+												<article class='pagina'>
+											";
+									}
+									
+									//Verifica padding
+									if($pagina == false)
+										$class = 'padEsq';
+									else
+										$class = 'padDir';
+									
+									//Verifica posição da imagem
+									if	(
+											(($pagina == false)	&& ($contadorProduto == 0)) ||
+											(($pagina == false) && ($contadorProduto == 2)) ||
+											(($pagina == true)	&& ($contadorProduto == 1)) ||
+											(($pagina == true)	&& ($contadorProduto == 3))
+										)
+										$id = 'esquerda';
+									else if	(
+												(($pagina == false)	&& ($contadorProduto == 1)) ||
+												(($pagina == false)	&& ($contadorProduto == 3)) ||
+												(($pagina == true)	&& ($contadorProduto == 0)) ||
+												(($pagina == true)	&& ($contadorProduto == 2))												
+											)
+										$id = 'direita';
+									
+									$produtos->valor = $this->controladorProdutos->converteValor($produtos->valor);
+									echo 
+										" 
+											<div title='Produto_{$produtos->nome}' class='produto, {$class}' id='{$id}'>
+												<img src='app.view/img/produtos/{$produtos->codigo}.png' alt='{$produtos->nome}' title='{$produtos->nome}'>
+												{$produtos->nome}<br />
+												{$produtos->valor}
+												<br><br><br><br><br>
+												<hr>
+											</div>
+										";
+									
+									
+									$contadorProduto++;
+								}
+								
+								echo '</article>';
+							}
+						?>
+						
 						<article class='contracapa'>
 						</article>
 					</div>

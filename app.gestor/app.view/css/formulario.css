@@ -78,7 +78,7 @@ input[type='button']:hover, input[type='submit']:hover
 	text-decoration:	underline;
 }
 
-input[type='text'], input[type='password'], input[type='number']
+input[type='text'], input[type='password'], input[type='number'], select
 {
 	background-color: 	#e4e0e0;
 	color:				#000000;
@@ -86,6 +86,39 @@ input[type='text'], input[type='password'], input[type='number']
 	font-size:			16px;
 	width:				98%;
 	border:				0 none;
+	padding-left:		5px;	
+}
+
+.fileUpload {
+	position: relative;
+	overflow: hidden;
+}
+.fileUpload input.upload {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+#uploadFile
+{
+	width: 75%;
+}
+
+input[type='radio'],input[type='checkbox']
+{
+	width:	16px;
+	height:	16px;
+}
+
+select
+{
+	width:			99.5%;
+	padding-left:	0;
 }
 
 ::-webkit-input-placeholder 
@@ -103,4 +136,10 @@ input[type='text'], input[type='password'], input[type='number']
 :-ms-input-placeholder 
 {  
    color: #a5a5a5;  
+}
+
+select option[default] 
+{
+	font-style: italic;
+	color:		#a5a5a5;
 }

@@ -58,11 +58,15 @@ class template
 				
 				<!--JQuery-->
 				<script type="text/javascript" src="app.view/js/jquery.js"></script>
+				<script type="text/javascript" src="app.view/js/jquery-maskMoney.js"></script>
+				<script type="text/javascript" src="app.view/js/jquery-form.js"></script>
 				
 				<!--JavaScript-->
 				<script type="text/javascript" src="app.view/js/formulario.js"></script>
 				<script type="text/javascript" src="app.view/js/categoria.js"></script>
 				<script type="text/javascript" src="app.view/js/usuario.js"></script>
+				<script type="text/javascript" src="app.view/js/produto.js"></script>
+				<script type="text/javascript" src="app.view/js/maskMoneys.js"></script>
 			</head>
 			<body>
 				<!--Background-->
@@ -80,7 +84,7 @@ class template
 									<a href='?class=produtos'>Produtos</a>
 								</li>
 								<li>
-									<a href='?class=usuarios'>Usuarios</a>
+									<a href='?class=usuarios'>Usuários</a>
 								</li>
 								<li>
 									<a href='?class=logoff'>Logoff</a>

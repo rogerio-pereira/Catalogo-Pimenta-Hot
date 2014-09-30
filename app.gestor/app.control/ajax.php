@@ -143,7 +143,6 @@
 	//Salva/Altera Usuario
 	else if($request == 'salvarUsuario')
 	{	
-		
 		$controlador = new controladorUsuario();
 		
 		$controlador->setUsuarioCodigo($_POST['codigo']);
@@ -262,7 +261,7 @@
 		}
 	}
 	//AlteraSenha
-	else if($request='alteraSenha')
+	else if($request=='alteraSenha')
 	{
 		$controlador	= new controladorAlterarSenha();
 		
@@ -290,5 +289,161 @@
 						alert('Senha inválida!');
 					</script>
 				";		
+	}
+	else if($request == 'salvarProduto')
+	{
+		$controlador = new controladorProdutos();
+		
+		$controlador->setProdutoCodigo($_POST['codigo']);
+		$controlador->setProdutoNome($_POST['nome']);
+		$controlador->setProdutoCategoria($_POST['categoria']);
+		$controlador->setProdutoValor($_POST['valor']);
+		$controlador->setProdutoLink($_POST['link']);
+		$controlador->setProdutoAtivo($_POST['ativo']);
+		
+		if($controlador->salvarProduto2() == true)
+		{
+			return true;
+		}
+		else
+		{
+			echo "<script> alert('Impossivel salvar Produto');</script>";
+			
+			return false;
+		}
+	}
+	else if($request == 'uploadProduto')
+	{
+		$controlador	= new controladorUpload;
+		$produto		= new catalogo_produtos2;
+		
+		TTransaction2::open('my_bd_site');
+		
+		$controlador->setNomeNovo($produto->getLast());
+		
+		TTransaction2::close();
+				
+		$controlador->setImagem_temp($_FILES["uploadBtn"]["tmp_name"]);
+		$controlador->setImagem_nome($_FILES["uploadBtn"]["name"]);
+		$controlador->setImagem_tamanho($_FILES["uploadBtn"]["size"]);
+		$controlador->setImagem_tipo($_FILES["uploadBtn"]["type"]);
+		
+		if($controlador->upload())
+			return true;
+		else
+		{
+			echo "<script> alert('Impossivel fazer o upload da imagem do produto!');</script>";
+			
+			return false;
+		}
+	}
+	//Apaga Produtos
+	else if($request == 'apagaProdutos')
+	{		
+		$codigos				= $_POST['codigos'];
+		$apagado				= 0;
+		
+		$controladorProdutos	= new controladorProdutos();
+		$controladorUpload		= new controladorUpload();
+		
+		foreach ($codigos as $codigo)
+		{
+			if($controladorProdutos->apagaProdutos2($codigo))
+			{
+				if($controladorUpload->apagar($codigo))
+					$apagado = $apagado;
+				else
+					$apagado++;
+			}
+			else
+				$apagado++;
+			
+		}
+		
+		/*if($apagado == 0)
+			echo
+				" 
+					<script>
+						alert('Todos os produtos foram apagados com sucesso!');
+					</script>
+				";
+		else
+			echo
+				" 
+					<script>
+						alert('Erro ao apagar Produto ou imagem!');
+					</script>
+				";*/
+		
+		$collectionProdutos = $controladorProdutos->getProdutos2();
+		
+		echo 
+			"
+				<tr class='titulo'>
+					<td>Alterar</td>
+					<td>Nome</td>
+					<td>Categoria</td>
+					<td>Ativo</td>
+					<td>Apagar</td>
+				</tr>
+				<tr>
+					<td colspan='5'>
+						<hr>
+					</td>
+				</tr>
+			";
+				
+		foreach($collectionProdutos as $produto)
+		{
+			echo
+				"
+					<tr>
+						<td class='center'>
+							<input type='radio' name='radioProduto' id='radioproduto' value='{$produto->codigo}'>
+						</td>
+						<td>
+							{$produto->nome}
+						</td>
+						<td>
+							{produto->categoria->nome}
+						</td>
+						<td>
+				";
+							if($produto->ativo == true)
+								echo '&check;';
+			echo
+				"
+						</td>
+						<td>
+							<input type='checkbox' name='produtosApagar[]' class='chkProdutosApagar' value='{$produto->codigo}'>
+						</td>
+					</tr><br>
+				";
+		}
+		
+		echo 
+			" 
+				<tr>
+					<td colspan='5'>
+						<hr>
+					</td>
+				</tr>
+				<tr>
+					<td colspan='5' class='center'>
+						<input type='button' value='Novo'		onclick='novoProduto()'>
+			";
+		
+		if(count($collectionProdutos) > 0)
+			echo 
+				" 
+					<input type='button' value='Alterar'	onclick='alteraProduto()'>
+					<input type='button' value='Apagar'		onclick='apagaProdutos()'>
+				";
+		
+		echo 
+			"
+					</td>
+				</tr>
+			";
 	}
 ?>

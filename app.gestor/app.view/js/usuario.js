@@ -70,12 +70,6 @@ function validaUsuario()
 //Salva/Altera o Usuario
 function salvarUsuario()
 {
-	var administrador;
-	
-	if($('input[name=adminstrador]:checked').val())
-		administrador = true;
-	else
-		administrador = false;
 	$.ajax
 	({
 		type: "POST",

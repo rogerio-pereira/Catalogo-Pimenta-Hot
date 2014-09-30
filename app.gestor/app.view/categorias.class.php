@@ -86,11 +86,14 @@ class categorias
 					<tr>
 						<td colspan='3' style='text-align: center'>
 							<input type='button' value='Nova'		onclick='novaCategoria()'>
-							<input type='button' value='Alterar'	onclick='alteraCategoria()'>
-
+							
 							<?php
 								if(count($this->collectionCategorias) > 0)
-									echo "<input type='button' value='Apagar' onclick='apagaCategorias()'>";
+									echo 
+										" 
+											<input type='button' value='Alterar'	onclick='alteraCategoria()'>
+											<input type='button' value='Apagar'		onclick='apagaCategorias()'>
+										";
 							?>
 						</td>
 					</tr>

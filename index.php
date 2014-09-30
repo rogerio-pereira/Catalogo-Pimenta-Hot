@@ -1,4 +1,4 @@
-<?php header("Content-Type:text/html; charset=ISO-8859-1",true) ?>
+<?php header("Content-Type:text/html; charset=UTF-8",true) ?>
 
 <?php 
 /*
@@ -30,7 +30,7 @@ class TApplication
     static public function run()
     {
         //Suprimir Warnings
-        error_reporting(E_WARNING);
+        //error_reporting(E_WARNING);
         
         //$template = file_get_contents('app.view/template.class.php');
         $catalogo = new catalogo;

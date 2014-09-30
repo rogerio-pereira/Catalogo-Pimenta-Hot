@@ -47,11 +47,11 @@ class categoria
 		>
 			<input type="hidden" id="action" name="action"/>
 			<fieldset>
-				<legend>Situação</legend>
+				<legend>Categoria</legend>
 				<table>
 					<!--Codigo-->
 					<tr>
-						<td width='15%'>
+						<td>
 							<label for='codigo'>Código:</label>
 						</td>
 						<td>

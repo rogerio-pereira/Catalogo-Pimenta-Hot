@@ -173,7 +173,7 @@
 			}			
 		}
 		
-		private function getLast()
+		public function getLast()
 		{
 			if ( $conn = TTransaction2::get() ) 
 			{

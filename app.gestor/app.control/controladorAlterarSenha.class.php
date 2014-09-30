@@ -65,17 +65,12 @@ class controladorAlterarSenha
 		
 		$senhaComp = md5($this->getSenhaAtual().$chave);
 		
-		var_dump($senhaComp);
-		var_dump($this->usuario->senha);
-		
 		if(md5($senhaComp) == $this->usuario->senha)
 		{
-			echo 'a';
 			return true;
 		}
 		else
 		{
-			echo 'b';
 			return false;
 		}
 	}
