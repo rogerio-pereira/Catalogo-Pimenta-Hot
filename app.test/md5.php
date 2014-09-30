@@ -10,5 +10,5 @@
  */
 	$chave = 'P!/\/\3nt4H072014*;';
 
-	echo md5('teste'.$chave);
+	echo md5('SupPimHot14;'.$chave);
 ?>
